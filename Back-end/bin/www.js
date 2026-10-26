@@ -6,15 +6,20 @@ const PORT = process.env.PORT || 8010;
 
 async function iniciar() {
   try {
-    //verificamos credenciales para saber si ya hicimos conexion con la base de datos 
-   await db.sequelize.authenticate();
+    // 1. Verificar credenciales
+    await db.sequelize.authenticate();
     console.log('Conexión a PostgreSQL establecida correctamente.');
-    //si todo funciono levantamos el servidor en el puerto definido en -env
+
+    // 2. Crear / Sincronizar tablas en la base de datos de Render
+    await db.sequelize.sync();
+    console.log('Tablas sincronizadas y creadas exitosamente en PostgreSQL.');
+
+    // 3. Levantar servidor
     app.listen(PORT, () => {
-      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+      console.log(`Servidor corriendo en el puerto ${PORT}`);
     });
   } catch (error) {
-    console.error('No se pudo conectar a la base de datos:', error.message);
+    console.error('No se pudo conectar o sincronizar la base de datos:', error.message);
   }
 }
 
