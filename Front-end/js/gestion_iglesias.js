@@ -11,7 +11,7 @@ async function cargarTablaIglesias() {
     
     // Consultamos los permisos antes de dibujar la tabla
     try {
-        const resPermisos = await fetch('http://localhost:8010/api/mis-permisos', {
+        const resPermisos = await fetch('https://proyectoiglesias.onrender.com/api/mis-permisos', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (resPermisos.ok) {
@@ -24,7 +24,7 @@ async function cargarTablaIglesias() {
     }
 
     try {
-        const response = await fetch('http://localhost:8010/api/iglesia', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/iglesia', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -84,7 +84,7 @@ window.abrirModalEditar = async function(id) {
 
     // Validar permisos directamente con el Back-end para desbloquear el Estado
     try {
-        const response = await fetch('http://localhost:8010/api/mis-permisos', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/mis-permisos', {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -120,7 +120,7 @@ document.getElementById('formEditarIglesia').addEventListener('submit', async (e
     };
 
     try {
-        const response = await fetch(`http://localhost:8010/api/iglesia/${id}`, {
+        const response = await fetch(`https://proyectoiglesias.onrender.com/api/iglesia/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ window.eliminarIglesia = async function(id) {
     if (!confirmar) return; // Se cancela la acción
 
     try {
-        const response = await fetch(`http://localhost:8010/api/iglesia/${id}`, {
+        const response = await fetch(`https://proyectoiglesias.onrender.com/api/iglesia/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`

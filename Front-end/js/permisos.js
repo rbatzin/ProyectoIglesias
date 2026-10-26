@@ -7,7 +7,7 @@ let idEdicion = null;
 
 async function cargarPermisos() {
     try {
-        const response = await fetch('http://localhost:8010/api/permiso', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/permiso', {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         if (response.ok) {
@@ -40,7 +40,7 @@ window.cargarDatosPermiso = (id, nombre) => {
 window.eliminarPermiso = async (id) => {
     if (!confirm('¿Seguro que deseas eliminar este permiso?')) return;
     try {
-        const response = await fetch(`http://localhost:8010/api/permisos/${id}`, {
+        const response = await fetch(`https://proyectoiglesias.onrender.com/api/permisos/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + token }
         });
@@ -55,7 +55,7 @@ formPermiso.addEventListener('submit', async (e) => {
     e.preventDefault();
     const datos = { nombre: document.getElementById('nombrePermiso').value };
     const metodo = idEdicion ? 'PUT' : 'POST';
-    const url = idEdicion ? `http://localhost:8010/api/permisos/${idEdicion}` : 'http://localhost:8010/api/permisos';
+    const url = idEdicion ? `https://proyectoiglesias.onrender.com/api/permisos/${idEdicion}` : 'https://proyectoiglesias.onrender.com/api/permisos';
 
     try {
         const response = await fetch(url, {

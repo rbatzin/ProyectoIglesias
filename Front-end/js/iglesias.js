@@ -15,7 +15,7 @@ if (token) {
         });
     }
 
-    fetch('http://localhost:8010/api/mis-permisos', {
+    fetch('https://proyectoiglesias.onrender.com/api/mis-permisos', {
         headers: { 'Authorization': 'Bearer ' + token }
     })
     .then(res => res.json())
@@ -113,7 +113,7 @@ if (formIglesia) {
 
         // 3. Enviar los datos al servidor
         try {
-            const response = await fetch('http://localhost:8010/api/iglesia', {
+            const response = await fetch('https://proyectoiglesias.onrender.com/api/iglesia', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ const btnLimpiar = document.getElementById('resetFilters');
 // 1. Obtener datos del servidor
 async function cargarDirectorio() {
     try {
-        const response = await fetch('http://localhost:8010/api/iglesia');
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/iglesia');
         if (response.ok) {
             iglesiasGlobal = await response.json();
             filtrarResultados(); // Llamamos a filtrar en lugar de dibujar directamente

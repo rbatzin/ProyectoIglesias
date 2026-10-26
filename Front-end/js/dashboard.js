@@ -15,7 +15,7 @@ async function cargarMenuDinamico() {
 
     try {
         // Petición a tu endpoint de permisos
-        const response = await fetch('http://localhost:8010/api/mis-permisos', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/mis-permisos', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

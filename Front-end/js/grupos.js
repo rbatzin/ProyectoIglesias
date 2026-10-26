@@ -7,7 +7,7 @@ let idEdicion = null;
 
 async function cargarGrupos() {
     try {
-        const response = await fetch('http://localhost:8010/api/grupo', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/grupo', {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         if (response.ok) {
@@ -40,7 +40,7 @@ window.cargarDatosGrupo = (id, nombre) => {
 window.eliminarGrupo = async (id) => {
     if (!confirm('¿Seguro que deseas eliminar este grupo?')) return;
     try {
-        const response = await fetch(`http://localhost:8010/api/grupos/${id}`, {
+        const response = await fetch(`https://proyectoiglesias.onrender.com/api/grupos/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + token }
         });
@@ -55,7 +55,7 @@ formGrupo.addEventListener('submit', async (e) => {
     e.preventDefault();
     const datos = { nombre: document.getElementById('nombreGrupo').value };
     const metodo = idEdicion ? 'PUT' : 'POST';
-    const url = idEdicion ? `http://localhost:8010/api/grupos/${idEdicion}` : 'http://localhost:8010/api/grupos';
+    const url = idEdicion ? `https://proyectoiglesias.onrender.com/api/grupos/${idEdicion}` : 'https://proyectoiglesias.onrender.com/api/grupos';
 
     try {
         const response = await fetch(url, {

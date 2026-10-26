@@ -6,7 +6,7 @@ document.getElementById('registroForm').addEventListener('submit', async (e) => 
     const alertaBox = document.getElementById('mensaje-alerta');
 
     try {
-        const response = await fetch('http://localhost:8010/api/usuario', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/usuario', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 

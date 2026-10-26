@@ -8,7 +8,7 @@ let idEdicion = null;
 
 async function cargarUsuarios() {
     try {
-        const response = await fetch('http://localhost:8010/api/usuario', {
+        const response = await fetch('https://proyectoiglesias.onrender.com/api/usuario', {
             headers: { 'Authorization': 'Bearer ' + token }
         });
         if (response.ok) {
@@ -46,7 +46,7 @@ window.cargarDatosUsuario = (id, login, grupo) => {
 window.eliminarUsuario = async (id) => {
     if (!confirm('¿Seguro que deseas eliminar este usuario?')) return;
     try {
-        const response = await fetch(`http://localhost:8010/api/usuario/${id}`, {
+        const response = await fetch(`https://proyectoiglesias.onrender.com/api/usuario/${id}`, {
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + token }
         });
@@ -68,7 +68,7 @@ formUsuario.addEventListener('submit', async (e) => {
     if (pass) datos.password = pass;
 
     const metodo = idEdicion ? 'PUT' : 'POST';
-    const url = idEdicion ? `http://localhost:8010/api/usuario/${idEdicion}` : 'http://localhost:8010/api/usuario';
+    const url = idEdicion ? `https://proyectoiglesias.onrender.com/api/usuario/${idEdicion}` : 'https://proyectoiglesias.onrender.com/api/usuario';
 
     try {
         const response = await fetch(url, {
