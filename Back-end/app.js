@@ -53,20 +53,9 @@ app.use('/api/usuario', usuarioRoutes);
 const iglesiaRoutes = require('./server/routes/iglesia.routes');
 app.use('/api/iglesia', iglesiaRoutes);
 
-// 4. Configuración para servir el Front-end
-// Asume que tus archivos HTML, CSS y JS están en una carpeta llamada "public"
-const frontendPath = path.join(__dirname, 'public');
-app.use(express.static(frontendPath));
-
-
-// Cualquier ruta GET que no sea de la API (/api/...) enviará el index.html
-app.use((req, res, next) => {
-    // Si no es una petición GET o si la ruta empieza con /api, la dejamos pasar
-    if (req.method !== 'GET' || req.originalUrl.startsWith('/api')) {
-        return next();
-    }
-    // De lo contrario, enviamos tu Front-end
-    res.sendFile(path.join(frontendPath, 'index.html'));
+// 4. Ruta raíz principal de la API (Elimina el intento de buscar la carpeta 'public')
+app.get('/', (req, res) => {
+    res.status(200).send('API de Iglesias funcionando correctamente en Render');
 });
 
 const db = require('./server/models');
@@ -80,7 +69,9 @@ app.get('/api/mis-permisos', async (req, res) => {
         if (!authHeader) return res.status(403).json({ message: 'Token requerido' });
         
         const token = authHeader.split(' ')[1];
-        const decoded = jwt.verify(token, 'una_clave_super_secreta_y_larga_12345'); // <-- Usa tu clave secreta real aquí
+        // Lee la clave dinámica de Render o toma la fallback
+        const secret = process.env.JWT_SECRET || 'una_clave_super_secreta_y_larga_12345';
+        const decoded = jwt.verify(token, secret);
 
         // 2. Buscar al usuario en la BD para saber su grupo
         const usuario = await db.Usuario.findByPk(decoded.id);
